@@ -35,12 +35,11 @@ public class HarmonyRestServer implements SparkApplication {
     private static Boolean noopCalls;
     private static Logger log;
 
+    private String harmonyHubIp = "192.168.1.202";
+
     @Override
     public void init() {
 
-
-
-        String harmonyHubIp = "192.168.1.202";
         log = LoggerFactory.getLogger(HarmonyRestServer.class);
         Version theVersion;
 
@@ -62,29 +61,7 @@ public class HarmonyRestServer implements SparkApplication {
         mainObject.execute(harmonyHubIp);
     }
 
- /*   public static void main(String[] args) throws Exception {
-        log = LoggerFactory.getLogger(HarmonyRestServer.class);
-        Version theVersion;
-        
-        theVersion = new Version();
-    	devMode = Boolean.parseBoolean(System.getProperty("dev.mode", "false"));
-        noopCalls = Boolean.parseBoolean(System.getProperty("noop.calls", "false"));
-        String modeString = "";
-        if(devMode)
-        	modeString = " (development mode)";
-        if(noopCalls)
-        	modeString = " (no op calls to harmony)";
-        log.info("Harmony v" + theVersion.getVersion() + " rest server running" + modeString + "....");
-    	Injector injector = null;
-    	if(!devMode)
-            injector = Guice.createInjector(new HarmonyClientModule());
-        HarmonyRestServer mainObject = new HarmonyRestServer();
-    	if(!devMode)
-    		injector.injectMembers(mainObject);
-        mainObject.execute(args);
-    }*/
-
-    public void execute(String harmonyHubIp)  {
+    private void execute(String harmonyHubIp)  {
         if(devMode)
         {
         	harmonyClient = null;
@@ -104,10 +81,5 @@ public class HarmonyRestServer implements SparkApplication {
         int sleepTime = Integer.parseInt(System.getProperty("button.sleep", "500"));
         harmonyApi = new HarmonyRest(harmonyClient, noopCalls, sleepTime, devResponse);
         harmonyApi.setupServer();
-        /*while(true)
-        {
-        	//no op
-        	Thread.sleep(100000);
-        }*/
     }
 }
