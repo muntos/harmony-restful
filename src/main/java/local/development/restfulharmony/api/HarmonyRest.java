@@ -268,7 +268,7 @@ public class HarmonyRest {
 	private String sendDeviceCommand(String theArguments, Request request, Response response) throws InterruptedException {
 		DeviceButton aDeviceButtons[];
 		String aResponse = "{\"status\": \"OK\"}";
-		Integer theDelay = 250;
+		Integer theDelay = 400;
 		int status_code = HttpStatus.SC_OK;
 		long timeNow = System.currentTimeMillis();
 		if (timeNow - timePrev > theDelay) {
