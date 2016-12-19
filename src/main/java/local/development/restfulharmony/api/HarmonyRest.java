@@ -99,16 +99,19 @@ public class HarmonyRest {
 		get(HARMONY_REST_CONTEXT + "/volume/:value", "application/json", (request, response) -> {
 
 			String theArguments = "";
+			String aResponse = "no command sent";
 			String value = request.params(":value");
 			int volume = Integer.valueOf(value);
 			if (volume > prevVolume || volume == 100) {
 				theArguments = getVolumeForHegel(true);
+				aResponse = sendDeviceCommand(theArguments, request, response);
 			}
 			else if (volume < prevVolume || volume == 0){
 				theArguments = getVolumeForHegel(false);
+				aResponse = sendDeviceCommand(theArguments, request, response);
 			}
 			prevVolume = volume;
-			String aResponse = sendDeviceCommand(theArguments, request, response);
+			log.debug("Volume command, the arguments: " + theArguments + " response: " + aResponse);
 
 			return aResponse;
 		});
