@@ -35,7 +35,7 @@ public class HarmonyRestServer implements SparkApplication {
     private static Boolean noopCalls;
     private static Logger log;
 
-    private String harmonyHubIp = "192.168.1.202";
+    private String harmonyHubIp = "192.168.1.170";
 
     @Override
     public void init() {
